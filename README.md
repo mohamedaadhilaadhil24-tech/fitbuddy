@@ -230,4 +230,5 @@ FALLBACK_MODEL=gemini-3.5-flash,gemini-3.6-flash,gemini-flash-lite-latest
 ### Security
 `.env` contains your API key and is listed in `.gitignore` — never commit or share it.
 #   f i t b u d d y  
+ #   f i t b u d d y  
  
