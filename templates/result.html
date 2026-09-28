@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FitBuddy — Your plan</title>
+  <link rel="icon" href="/static/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" href="/static/images/favicon-48.png" />
+  <link rel="stylesheet" href="/static/css/style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><img class="brand-logo" src="/static/images/logo.png" alt="FitBuddy logo" />FitBuddy <span>AI Fitness Plan Generator</span></div>
+    <nav class="topnav">
+      <a href="/">New plan</a>
+      <a href="/view-all-users">Admin</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h1 class="page-title">Your plan</h1>
+    <p class="page-sub">Generated with Google Gemini from your profile and goal.</p>
+
+    {% if error %}
+    <div class="alert">{{ error }}</div>
+    {% endif %}
+
+    {% if user %}
+    {% if updated %}<span class="badge">Updated from your feedback</span>{% endif %}
+
+    <div class="card">
+      <h2>Profile</h2>
+      <div class="profile">
+        <div><span>Name</span><strong>{{ user.username }}</strong></div>
+        <div><span>User ID</span><strong>{{ user.user_id }}</strong></div>
+        <div><span>Age</span><strong>{{ user.age }} yrs</strong></div>
+        <div><span>Weight</span><strong>{{ user.weight }} kg</strong></div>
+        <div><span>Goal</span><strong>{{ user.goal }}</strong></div>
+        <div><span>Intensity</span><strong>{{ user.intensity }}</strong></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>7-day workout plan</h2>
+      <pre>{{ workout_plan }}</pre>
+    </div>
+
+    <div class="card">
+      <h2>Nutrition / recovery tip</h2>
+      <div class="tip">{{ nutrition_tip }}</div>
+    </div>
+
+    <div class="card">
+      <h2>Refine your plan</h2>
+      <form action="/submit-feedback" method="post">
+        <div class="field">
+          <label for="user_id">Your user ID</label>
+          <input type="text" id="user_id" name="user_id" value="{{ user.user_id }}" required />
+        </div>
+        <div class="field">
+          <label for="feedback">Feedback</label>
+          <textarea id="feedback" name="feedback" placeholder="e.g. Include more cardio, add yoga, more rest days…" required></textarea>
+        </div>
+        <div class="form-actions">
+          <button class="btn btn-primary" type="submit">Update plan</button>
+        </div>
+      </form>
+    </div>
+    {% endif %}
+
+    <nav class="nav">
+      <a href="/">&#8592; Generate another plan</a>
+      <a href="/view-all-users">Admin dashboard</a>
+    </nav>
+  </main>
+</body>
+</html>

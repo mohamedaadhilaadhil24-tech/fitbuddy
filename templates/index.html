@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FitBuddy — Create your plan</title>
+  <link rel="icon" href="/static/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" href="/static/images/favicon-48.png" />
+  <link rel="stylesheet" href="/static/css/style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><img class="brand-logo" src="/static/images/logo.png" alt="FitBuddy logo" />FitBuddy <span>AI Fitness Plan Generator</span></div>
+    <nav class="topnav"><a href="/view-all-users">Admin</a></nav>
+  </header>
+
+  <main class="container">
+    <h1 class="page-title">Create your plan</h1>
+    <p class="page-sub">Share a few details and Gemini will build your personalized 7-day workout plan.</p>
+
+    <div class="card">
+      <form action="/generate-workout" method="post">
+        <div class="row">
+          <div class="field">
+            <label for="username">Name</label>
+            <input type="text" id="username" name="username" placeholder="John Doe" required />
+          </div>
+          <div class="field">
+            <label for="user_id">User ID</label>
+            <input type="text" id="user_id" name="user_id" placeholder="u101" required />
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="field">
+            <label for="age">Age</label>
+            <input type="number" id="age" name="age" min="1" max="119" placeholder="25" required />
+          </div>
+          <div class="field">
+            <label for="weight">Weight (kg)</label>
+            <input type="number" id="weight" name="weight" step="0.1" min="1" placeholder="70" required />
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="goal">Fitness goal</label>
+          <select id="goal" name="goal" required>
+            <option value="weight loss">Weight loss</option>
+            <option value="muscle gain">Muscle gain</option>
+            <option value="general wellness">General wellness</option>
+            <option value="flexibility">Flexibility</option>
+            <option value="endurance">Endurance</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="intensity">Workout intensity</label>
+          <select id="intensity" name="intensity" required>
+            <option value="low">Low</option>
+            <option value="medium" selected>Medium</option>
+            <option value="high">High</option>
+          </select>
+        </div>
+
+        <div class="form-actions">
+          <button class="btn btn-primary" type="submit">Generate plan</button>
+        </div>
+      </form>
+    </div>
+  </main>
+</body>
+</html>
